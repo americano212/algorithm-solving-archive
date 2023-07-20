@@ -22,14 +22,15 @@ cnt = 0
 def bfs():
     global cnt
     x, y = queue.popleft()
-    if(L[x][y] == 'P'):
-        cnt += 1
-    L[x][y] = 'X'
+    
     for i in range(4):
         nx = x + dx[i]
         ny = y + dy[i]
         if(0<=nx<n and 0<=ny<m):
             if(L[nx][ny] != 'X'):
+                if(L[nx][ny] == 'P'):
+                    cnt += 1
+                L[nx][ny] = 'X'
                 queue.append([nx, ny])
 
 
