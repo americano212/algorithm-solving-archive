@@ -1,4 +1,5 @@
-s = 'abc'
-s = list(s)
-s[1] = 'a'
-print(s)
+prt = 1
+for i in range(1, 17):
+    prt = prt * i
+
+print(prt)
