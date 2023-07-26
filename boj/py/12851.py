@@ -1,5 +1,5 @@
 from collections import deque
-
+# https://www.acmicpc.net/problem/12851
 n, k = map(int, input().split())
 
 queue = deque()
