@@ -14,8 +14,8 @@ s = s.split('\n')[1:-1]
 
 D = dict()
 for i in range(len(s)):
-    a,b,c = s[i].split('\t')
-    D[a] = [b.replace(',',''), int(c.replace(',',''))]
+    a, b, c = s[i].split('\t')
+    D[a] = [b.replace(',', ''), int(c.replace(',', ''))]
 
 s1 = input()
 s2 = input()
