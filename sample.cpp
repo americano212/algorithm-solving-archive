@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 
 #define endl '\n';
+#define INF 2147483647;
 using namespace std;
 typedef long long int ll;
 typedef vector<vector<ll>> matrix;
