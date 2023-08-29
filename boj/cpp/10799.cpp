@@ -16,11 +16,31 @@ ll result = 0;
 
 bool flag;
 
-stack<char> stk;
-
 using namespace std;
 
-void solve() { string s, strn; }
+void solve() {
+    string s, strn;
+    stack<string> stk;
+    cin >> strn;
+    flag = false;
+    for (i = 0; i < strn.length(); i++) {
+        s = strn[i];
+        if (s == "(") {
+            stk.push(s);
+            flag = true;
+        } else {
+            if (flag) {
+                stk.pop();
+                ans += stk.size();
+            } else {
+                stk.pop();
+                ans += 1;
+            }
+            flag = false;
+        }
+    }
+    cout << ans << endl;
+}
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
