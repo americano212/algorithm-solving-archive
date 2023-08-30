@@ -16,11 +16,13 @@ ll result = 0;
 
 bool flag;
 
-stack<char> stk;
-
 using namespace std;
 
-void solve() { string s, strn; }
+void solve() {
+    string s, strn;
+    stack<int> stk;
+    vector<int> v;
+}
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
