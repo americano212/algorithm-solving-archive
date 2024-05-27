@@ -16,7 +16,6 @@ bool cmp(pair <int, int> a, pair <int, int> b) {
     if (a.first == b.first) return a.second < b.second;
     return a.first < b.first;
 }
-ll max_size = 0;
 
 int r, c;
 
@@ -28,7 +27,6 @@ void recur(int size, int start_x, int start_y, int start_num) {
 
     int half = size / 2;
 
-    
     FOR(i, 0, 2) {
         FOR(j, 0, 2) {
             if (start_x + half * i <= c && c < start_x + half * (i + 1) &&
