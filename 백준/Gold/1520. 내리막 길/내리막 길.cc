@@ -37,29 +37,26 @@ void solve() {
     ll m, n;
     cin >> m >> n;
     
-    ll cost;
     matrix mat(m, vector<ll>(n));
-    priority_queue<pllp, vector<pllp>, greater<pllp>> pq;
+    priority_queue<pllp, vector<pllp>, greater<pllp>> pq; // {높이, {세로,가로}}
 
     FOR(i, 0, m) {
         FOR(j, 0, n) {
-            cin >> cost;
-            mat[i][j] = cost;
-
-            if (i == m - 1 && j == n - 1) continue;
-            pq.push({ cost, {i,j} });
+            cin >> mat[i][j];
+            pq.push({ mat[i][j], {i,j} });
         }
     }
+
     matrix dp(m, vector<ll>(n, 0));
     dp[m - 1][n - 1] = 1;
-    
 
     while (!pq.empty()) {
         pllp now = pq.top();
-        // cout << now.first << endl;
-        ll x = now.second.first;
-        ll y = now.second.second;
+        ll x = now.second.first; // 현재노드 세로
+        ll y = now.second.second; // 현재노드 가로
         pq.pop();
+
+        // 상하좌우에 더 낮은 노드 있는지 확인
         FOR(idx, 0, 4) {
             ll nx = x + dx[idx];
             ll ny = y + dy[idx];
@@ -71,12 +68,6 @@ void solve() {
         }
     }
 
-    /*FOR(i, 0, m) {
-        FOR(j, 0, n) {
-            cout << dp[i][j] << ' ';
-        }
-        cout << endl;
-    }*/
     cout << dp[0][0] << endl;
 }
 
