@@ -34,26 +34,13 @@ struct ITEM { bool isNum; int num = 0; char bracket = ' '; };
 
 
 void solve() {
-    vector<bool> isSKWin(1001, true);
-    isSKWin[1] = false;
-    isSKWin[2] = true;
-    isSKWin[3] = false;
-    isSKWin[4] = true;
-
-    FOR(i, 5, 1001) {
-        bool win = false;
-        if (isSKWin[i - 1] == false || isSKWin[i - 3] == false || isSKWin[i - 4] == false) {
-            win = true;
-        }
-        isSKWin[i] = win;
-    }
-    int n;
+    ll n;
     cin >> n;
-    if (isSKWin[n]) {
-        cout << "SK" << endl;
+    if (n % 7 == 1 || n % 7 == 3) {
+        cout << "CY" << endl;
     }
     else {
-        cout << "CY" << endl;
+        cout << "SK" << endl;
     }
 }
 
