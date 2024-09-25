@@ -39,26 +39,52 @@ void solve() {
     vector<ll> v(n);
     FOR(i, 0, n) cin >> v[i];
 
+    vector<ll> two_sqr(64);
+    FOR(i, 0, 64) {
+        two_sqr[i] = pow(2, i);
+    }
+    
+    vector<ll> dp(n, 0);
 
-    ll ans = 0;
     FOR(i, 1, n) {
-        if (v[i - 1] <= v[i]) continue;
-
-        int x = log2((double)v[i - 1] / (double)v[i]);
-        // cout <<"? " << v[i] << ' ' << x << endl;
-        if (v[i - 1] <= v[i] * pow(2, x)) {
-            ans += x;
-            v[i] *= pow(2, x);
+        if (v[i - 1] > v[i]) {
+            int k = 0;
+            FOR(j, 0, 64) {
+                if (v[i - 1] <= v[i] * two_sqr[j]) {
+                    k = j;
+                    break;
+                }
+            }
+            dp[i] = dp[i - 1] + k;
+        }
+        else if (v[i - 1] < v[i]) {
+            int k = 0;
+            FOR(j, 0, 64) {
+                if (v[i] == v[i - 1] * two_sqr[j]) {
+                    k = j;
+                    break;
+                }
+                if (v[i] < v[i - 1] * two_sqr[j]) {
+                    k = j - 1;
+                    break;
+                }
+            }
+            dp[i] = max(dp[i - 1] - k, 0LL);
         }
         else {
-            ans += x + 1;
-            v[i] *= pow(2, x + 1);
+            dp[i] = dp[i - 1];
         }
     }
+    
     //FOR(i, 0, n) {
-    //    cout << v[i] << ' ';
+    //    cout << dp[i] << ' ';
     //}
     //cout << endl;
+    
+    ll ans = 0;
+    FOR(i, 0, n) {
+        ans += dp[i];
+    }
     cout << ans << endl;
 }
 
