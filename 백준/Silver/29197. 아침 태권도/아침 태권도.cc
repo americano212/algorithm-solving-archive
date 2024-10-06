@@ -37,7 +37,7 @@ void solve() {
     int n;
     cin >> n;
     
-    vector<double> v;
+    vector<pair<double, bool>> v;
     bool up = false;
     bool down = false;
     
@@ -49,8 +49,8 @@ void solve() {
             else down = true;
             continue;
         }
-
-        v.push_back(y / x);
+        
+        v.push_back({ y / x, x > 0 });
     }
     sort(all(v));
     int ans = 0;
@@ -58,10 +58,10 @@ void solve() {
     if (down) ans++;
 
     if (v.size() > 0) {
-        double before = INF;
+        pair<double, bool> before = { INF,true };
         
         FOR(i, 0, v.size()) {
-            if (before != v[i]) {
+            if (before.first != v[i].first || before.second != v[i].second) {
                 before = v[i];
                 ans++;
             }
