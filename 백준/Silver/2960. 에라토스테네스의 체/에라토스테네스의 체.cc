@@ -1,62 +1,66 @@
-#include <iostream>
-#include <algorithm>
-#include <string>
-#include <vector>
-#include <cmath>
-#include <functional>
-#include <climits>
-#include <stack>
-#include <queue>
-#include <deque>
-#include <map>
-#include <set>
-#include <cstring>
-#include <cassert>
-using ll = long long;
+#include <bits/stdc++.h>
+#define FOR(x,y,n)  for(int x=y;x<(n);x++) 
+#define endl '\n';
+#define INF 2'147'483'647LL
+#define ll long long
+#define ld long double
+#define pii pair<int, int>
+#define pll pair<ll, ll>
+#define pllp pair<ll, pll>
+#define pff pair<float, float>
+#define pdd pair<double, double>
+#define pldd pair<ld, ld>
+#define matrix vector<vector<ll>>
+#define lcm(a, b) a * b / gcd(a, b)
+#define all(v) v.begin(), v.end()
+#define btw(x,a,b) a<=x && x<b
+ll gcd(ll a, ll b) { return (b ? gcd(b, a % b) : a); }
+
+const ll mod = 1'000'000'007LL;
+int dx[4] = { -1,0,1,0 };
+int dy[4] = { 0,-1,0,1 };
+int dx6[6] = { 1,-1,0,0,0,0 };
+int dy6[6] = { 0,0,1,-1,0,0 };
+int dz6[6] = { 0,0,0,0,1,-1 };
+int dx8[8] = { 0,-1,-1,-1,0,1,1,1 };
+int dy8[8] = { 1,1,0,-1,-1,-1,0,1 };
+
 using namespace std;
-ll inf = 1000000007;
+
+struct EDGE { ll start; ll end; ll cost; };
+struct DOT3 { ll x; ll y; ll z; };
+struct NODE { ll max_value; int max_index; ll now_value; int now_node; };
+struct ITEM { bool isNum; int num = 0; char bracket = ' '; };
+struct MOVE { int x; int y; int time; };
 
 
-
+void solve() {
+    int n, k;
+    cin >> n >> k;
+    vector<bool> v(n + 1, true);
+    int cnt = 0;
+    FOR(start, 2, n + 1) {
+        if (v[start]) {
+            for (int i = 1; start * i < n + 1; i++) {
+                if (v[start * i]) {
+                    v[start * i] = false;
+                    cnt++;
+                }
+                if (cnt == k) {
+                    cout << start * i << endl;
+                    return;
+                }
+            }
+        }
+    }
+}
 
 int main() {
-	ios_base::sync_with_stdio(0);
-	cin.tie(0), cout.tie(0);
+    cin.tie(0)->sync_with_stdio(0);
 
-	int n, k;
-	cin >> n >> k;
-	vector<int> v(n + 1);
-	for (int i = 0; i < n + 1; i++) {
-		v[i] = 0;
-	}
-	int flag = 0 , target;
-	while (true) {
-		target = 0;
-		for (int i = 2; i < n + 1; i++) {
-			if (v[i] == 0 && target == 0) {
-				target = i;
-				v[i] = 1;
-				k -= 1;
-			}
-			else if (v[i] == 0 && target != 0) {
-				if (i%target == 0) {
-					k -= 1;
-					v[i] = 1;
-				}
-			}
-			else {
-				continue;
-			}
-			if (k == 0) {
-				flag = i;
-				break;
-			}
-		}
-		if (flag != 0) {
-			cout << flag << endl;
-			break;
-		}
-	}
+    ll tc = 1;
+    // cin >> tc;
+    while (tc--)solve();
 
-	return 0;
+    return 0;
 }
