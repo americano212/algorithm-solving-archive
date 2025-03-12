@@ -43,7 +43,12 @@ void solve() {
 
     FOR(i, 0, n) {
         ll num = (int)(s[i] - 'a') + 1;
-        ans += num * ((ll)pow(31, i) % mod);
+        ll tmp = 1;
+        FOR(j, 0, i) {
+            tmp *= 31;
+            tmp %= mod;
+        }
+        ans += num * tmp;
         ans %= mod;
     }
     cout << ans % mod << endl;
