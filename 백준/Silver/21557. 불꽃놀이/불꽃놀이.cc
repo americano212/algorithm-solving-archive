@@ -33,8 +33,20 @@ void solve() {
     cin >> n;
     vector<int> v(n);
     FOR(i, 0, n) cin >> v[i];
-    sort(all(v));
-    cout << v[n - 1] - (n - 2) << endl;
+    int a = v[0];
+    int b = v[n - 1];
+    while (n > 3) {
+        if (a > b)
+            a--;
+        else
+            b--;
+        n--;
+    }
+    if (n == 3) {
+        a--;
+        b--;
+    }
+    cout << max(a, b) << endl;
 }
 
 int main() {
