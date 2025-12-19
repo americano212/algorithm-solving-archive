@@ -1,52 +1,44 @@
-#include <algorithm>
 #include <bits/stdc++.h>
-#include <iostream>
-#include <vector>
-#define pii pair<int, int>
+
 using namespace std;
-
-vector<pair<int, int>> salesman(int N, vector<pair<int, int>> meetings) {
-    vector<pii> answer;
-
-    priority_queue<pii, vector<pii>, greater<pii>> pq;
-    for (int i = 0; i < N; i++) {
-        pq.push({meetings[i].second, meetings[i].first});
-    }
-
-    int last_end = 0;
-    while (!pq.empty()) {
-        auto [b, a] = pq.top();
-        pq.pop();
-        if (last_end <= a) {
-            last_end = b;
-            answer.push_back({a, b});
-        }
-    }
-    // TODO: Implement the salesman function
-
-    return answer;
-}
-
+#define ll long long
+#define pll pair<ll,ll>
+#define pllp pair<ll, pll>
+#define btw(n,x,y) x<=n && n<y
+#define all(x) x.begin(), x.end()
 
 int main() {
-    ios_base::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
+    
+    int n;
+    cin >> n;
 
-    int N;
-    cin >> N;
-    vector<pair<int, int>> meetings(N);
-    int tmp;
-    for (int i = 0; i < N; i++) {
-        cin >> meetings[i].first >> meetings[i].second >> tmp;
+    ll s, e, p;
+    vector<pllp> meetings(n+1);
+
+    for (int i = 1; i < n + 1; i++) {
+        cin >> s >> e >> p;
+        meetings[i] = { e,{s,p} };
     }
 
-    vector<pair<int, int>> ans = salesman(N, meetings);
+    sort(all(meetings));
+    vector<int> end_times;
+    for (int i = 1; i < n + 1; i++) {
+        end_times.push_back(meetings[i].first);
+        //cout << meetings[i].first << ' ';
+    }
+    // cout << endl;
 
-    // for (auto meeting: ans) {
-    //     cout << meeting.first << " " << meeting.second << " ";
-    // }
-    // cout << '\n';
-    cout << ans.size() << endl;
+    vector<ll> dp(n + 1, 0);
 
-    return 0;
+    for (int i = 1; i <= n; i++) {
+        int now_start = meetings[i].second.first;
+        ll now_profit = meetings[i].second.second;
+
+        int idx = upper_bound(end_times.begin(), end_times.begin() + i - 1, now_start) - end_times.begin();
+
+        dp[i] = max(dp[i - 1], now_profit + dp[idx]);
+    }
+    cout << dp[n] << endl;
 }
